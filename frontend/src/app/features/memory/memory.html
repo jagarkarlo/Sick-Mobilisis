@@ -1,0 +1,161 @@
+<div class="page">
+  <!-- Header -->
+  <div class="page-header">
+    <div>
+      <h1>Memory Monitor</h1>
+      <p>
+        Live memory usage over WebSocket with reconnection, pause/resume, and optional smoothing.
+      </p>
+    </div>
+  </div>
+
+  <!-- Connection / Controls card -->
+  <div class="card">
+    <div class="connection-panel">
+      <!-- Connection status pill -->
+      <div class="status" [ngClass]="'status-' + getStatusClass()">
+        <span class="dot"></span>
+        <ng-container [ngSwitch]="connectionState">
+          <span *ngSwitchCase="'connected'">
+            Connected
+          </span>
+          <span *ngSwitchCase="'connecting'">
+            Connecting...
+          </span>
+          <span *ngSwitchCase="'error'">
+            Connection error
+          </span>
+          <span *ngSwitchDefault>
+            Disconnected
+          </span>
+        </ng-container>
+
+        <span *ngIf="reconnectAttempt > 0" style="margin-left: 8px; font-size: 0.8rem; color: #6b7280;">
+          (attempt {{ reconnectAttempt }})
+        </span>
+      </div>
+
+      <!-- Controls -->
+      <div class="controls">
+        <button
+          (click)="connect()"
+          [disabled]="connectionState === 'connected' || connectionState === 'connecting'"
+        >
+          Connect
+        </button>
+
+        <button
+          (click)="disconnect()"
+          [disabled]="connectionState === 'disconnected' || connectionState === 'connecting'"
+        >
+          Disconnect
+        </button>
+
+        <button
+          (click)="togglePause()"
+          [class.paused]="isPaused"
+          [disabled]="connectionState !== 'connected'"
+        >
+          {{ isPaused ? '▶ Resume' : '⏸ Pause' }}
+        </button>
+
+        <button
+          (click)="toggleSmoothing()"
+        >
+          {{ showSmoothing ? 'Hide Smoothing' : 'Show Smoothing' }}
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Smoothing card with ring (only show when enabled) -->
+  <div class="card" *ngIf="showSmoothing">
+    <div class="smoothing-section">
+      <!-- Smoothing ring -->
+      <div
+        class="smoothing-ring-wrapper"
+        [ngClass]="'smoothing-' + getUsageClass(getRollingAverage())"
+      >
+        <div
+          class="smoothing-ring"
+          [style.--fill.%]="getRollingAverage()"
+        >
+          <span class="value">
+            {{ getRollingAverage() | number : '1.0-0' }}%
+          </span>
+        </div>
+        <div class="smoothing-label">
+        </div>
+      </div>
+
+      <!-- Details -->
+      <div class="smoothing-details">
+        <h3>Smoothing Active</h3>
+        <p *ngIf="memoryHistory.length > 0">
+          Latest raw value: <strong>{{ memoryHistory[0].usagePercent | number : '1.0-1' }}%</strong>
+        </p>
+        <p *ngIf="memoryHistory.length > 0">
+          Smoothed value: <strong>{{ getRollingAverage() | number : '1.0-1' }}%</strong>
+        </p>
+        <p *ngIf="memoryHistory.length === 0" style="color: #6b7280;">
+          Waiting for data...
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- History card -->
+  <div class="card">
+    <div class="table-header">
+      <h3>Last 20 Samples</h3>
+      <span class="note" *ngIf="memoryHistory.length > 0">
+        {{ memoryHistory.length }} / 20 samples
+      </span>
+    </div>
+
+    <ng-container *ngIf="memoryHistory.length > 0; else noHistory">
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th class="sortable" (click)="sortBy('timestamp')">
+                Time
+                <span class="sort-icon">{{ getSortIcon('timestamp') }}</span>
+              </th>
+              <th class="sortable" (click)="sortBy('usagePercent')">
+                Usage
+                <span class="sort-icon">{{ getSortIcon('usagePercent') }}</span>
+              </th>
+              <th>Used / Total</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let record of memoryHistory">
+              <td>{{ formatTime(record.timestamp) }}</td>
+              <td>{{ record.usagePercent | number : '1.0-1' }}%</td>
+              <td>
+                {{ record.usedMB | number : '1.0-0' }} / {{ record.totalMB | number : '1.0-0' }} MB
+              </td>
+              <td>
+                <span class="badge" [ngClass]="'badge-' + getUsageClass(record.usagePercent)">
+                  <ng-container [ngSwitch]="getUsageClass(record.usagePercent)">
+                    <span *ngSwitchCase="'normal'">Normal</span>
+                    <span *ngSwitchCase="'warning'">High</span>
+                    <span *ngSwitchDefault>Critical</span>
+                  </ng-container>
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </ng-container>
+
+    <ng-template #noHistory>
+      <div class="empty">
+        No memory data yet. Connect to start receiving live data.
+      </div>
+    </ng-template>
+  </div>
+</div>

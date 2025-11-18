@@ -1,0 +1,290 @@
+.page {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding-bottom: 32px;
+}
+
+/* Header */
+
+.page-header {
+  margin-bottom: 18px;
+}
+
+.page-header h1 {
+  margin: 0 0 8px;
+  font-size: 1.7rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+.page-header p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #6b7280;
+}
+
+/* Card */
+
+.card {
+  background: #ffffff;
+  border-radius: 14px;
+  border: 1px solid #e5e7eb;
+  padding: 16px 18px;
+  margin-bottom: 18px;
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.06);
+}
+
+/* Connection panel */
+
+.connection-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  font-size: 0.8rem;
+  color: #111827;
+}
+
+.status .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: #9ca3af;
+  margin-right: 6px;
+}
+
+.status-connected .dot {
+  background: #16a34a;
+}
+
+.status-connecting .dot {
+  background: #eab308;
+}
+
+.status-error .dot {
+  background: #ef4444;
+}
+
+.status-disconnected .dot {
+  background: #9ca3af;
+}
+
+/* Controls */
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.controls button {
+  border: 1px solid #d1d5db;
+  background: #f9fafb;
+  color: #111827;
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease,
+    transform 0.05s ease;
+}
+
+.controls button:hover:not(:disabled) {
+  background: #eff6ff;
+  border-color: #3b82f6;
+}
+
+.controls button:disabled {
+  cursor: default;
+  opacity: 0.6;
+}
+
+.controls button.paused {
+  background: #fff7ed;
+  border-color: #f97316;
+  color: #9a3412;
+}
+
+.smoothing-section {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.smoothing-ring-wrapper {
+  width: 140px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.smoothing-ring {
+  --fill: 0%;
+  --ring-color: #22c55e;
+
+  position: relative;
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background:
+    radial-gradient(circle at center, #ffffff 60%, transparent 61%),
+    conic-gradient(var(--ring-color) var(--fill), #e5e7eb 0);
+
+  box-shadow:
+    0 0 0 1px #e5e7eb,
+    0 10px 18px rgba(15, 23, 42, 0.08);
+  transition: background 0.25s ease-out;
+}
+
+.smoothing-ring .value {
+  position: relative;
+  z-index: 1;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+.smoothing-label {
+  font-size: 0.8rem;
+  color: #6b7280;
+  text-align: center;
+}
+
+.smoothing-normal .smoothing-ring {
+  --ring-color: #22c55e; 
+}
+
+.smoothing-warning .smoothing-ring {
+  --ring-color: #eab308; 
+}
+
+.smoothing-critical .smoothing-ring {
+  --ring-color: #ef4444;
+}
+
+.smoothing-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.smoothing-details h3 {
+  margin: 0 0 6px;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #111827;
+}
+
+.smoothing-details p {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #4b5563;
+}
+
+/* History table */
+
+.table-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.table-header .note {
+  font-size: 0.8rem;
+  color: #6b7280;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+thead {
+  background: #f9fafb;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 8px 10px;
+  border-bottom: 1px solid #e5e7eb;
+  vertical-align: middle;
+}
+
+th {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #6b7280;
+}
+
+tbody tr:hover {
+  background: #f9fafb;
+}
+
+/* Sortable headers */
+
+th.sortable {
+  cursor: pointer;
+  user-select: none;
+}
+
+th.sortable .sort-icon {
+  margin-left: 4px;
+  font-size: 0.75rem;
+}
+
+/* Empty state */
+
+.empty {
+  text-align: center;
+  color: #6b7280;
+  padding: 20px 8px;
+  font-size: 0.9rem;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+.badge-normal {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.badge-warning {
+  background: #fef9c3;
+  color: #854d0e;
+}
+
+.badge-critical {
+  background: #fee2e2;
+  color: #b91c1c;
+}

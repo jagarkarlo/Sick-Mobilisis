@@ -1,0 +1,86 @@
+<div class="page">
+  <h1>Ping Monitor</h1>
+  
+  <div class="card">
+    <div class="stats">
+      <div class="stat">
+        <label>Status</label>
+        <span class="value" [class.success]="currentStatus === 'OK'" [class.error]="currentStatus === 'ERROR'">
+          {{ currentStatus }}
+        </span>
+      </div>
+      <div class="stat">
+        <label>Last Ping</label>
+        <span class="value">{{ lastSuccessfulPing }}</span>
+      </div>
+      <div class="stat">
+        <label>Latency</label>
+        <span class="value">{{ lastLatency }} ms</span>
+      </div>
+      <div class="stat">
+        <button (click)="togglePause()" [class.paused]="isPaused">
+          {{ isPaused ? '▶ Resume' : '⏸ Pause' }}
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Settings</h3>
+    <form [formGroup]="pollingForm" class="inline-form">
+      <div class="form-field">
+        <label for="interval">Polling Interval (seconds)</label>
+        <input 
+          type="number" 
+          id="interval"
+          formControlName="interval"
+          min="1" 
+          max="60"
+          (change)="onIntervalChange()">
+        <small *ngIf="pollingForm.get('interval')?.invalid && pollingForm.get('interval')?.touched" class="error">
+          Must be 1-60
+        </small>
+      </div>
+    </form>
+  </div>
+
+  <div class="card">
+    <div class="table-header">
+      <h3>Last 10 Pings</h3>
+      <form [formGroup]="filterForm" class="filter-form">
+        <label for="statusFilter">Filter:</label>
+        <select id="statusFilter" formControlName="statusFilter">
+          <option value="all">All</option>
+          <option value="OK">OK Only</option>
+          <option value="WARN">WARN Only</option>
+          <option value="ERROR">ERROR Only</option>
+        </select>
+      </form>
+    </div>
+    
+    <div *ngIf="filteredHistory.length === 0" class="empty">
+      <p>{{ pingHistory.length === 0 ? 'No data yet...' : 'No matches.' }}</p>
+    </div>
+    
+    <table *ngIf="filteredHistory.length > 0">
+      <thead>
+        <tr>
+          <th (click)="sortBy('timestamp')" class="sortable">Time {{ getSortIcon('timestamp') }}</th>
+          <th (click)="sortBy('status')" class="sortable">Status {{ getSortIcon('status') }}</th>
+          <th (click)="sortBy('latencyMs')" class="sortable">Latency {{ getSortIcon('latencyMs') }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let ping of filteredHistory">
+          <td>{{ formatTime(ping.timestamp) }}</td>
+          <td>
+            <span class="badge" [class.success]="ping.status === 'OK'" [class.warning]="ping.status === 'WARN'" [class.error]="ping.status === 'ERROR'">
+              {{ ping.status }}
+            </span>
+          </td>
+          <td>{{ ping.latencyMs }} ms</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,53 @@
+<div class="page">
+  <h1>CPU Monitor</h1>
+  
+  <div class="card">
+    <div class="header-actions">
+      <div class="info">
+        <p><strong>Last Refresh:</strong> {{ lastRefresh }}</p>
+        <p class="note">⚠️ 2-3 second delay per request</p>
+      </div>
+      <button (click)="refresh()" [disabled]="isLoading" class="refresh-btn">
+        {{ isLoading ? 'Loading...' : 'Refresh' }}
+      </button>
+    </div>
+  </div>
+
+  <div class="card" *ngIf="isLoading && !hasData">
+    <div class="loading-skeleton">
+      <div class="skeleton-bar"></div>
+      <div class="skeleton-bar"></div>
+      <div class="skeleton-bar"></div>
+    </div>
+    <p class="loading-text">Fetching CPU data (2-3 seconds)...</p>
+  </div>
+
+  <div class="card">
+    <h3>Last 10 CPU Samples</h3>
+    
+    <div *ngIf="cpuHistory.length === 0" class="empty">
+      <p>No data. Click "Refresh" to fetch.</p>
+    </div>
+    
+    <table *ngIf="cpuHistory.length > 0">
+      <thead>
+        <tr>
+          <th (click)="sortBy('timestamp')" class="sortable">Timestamp {{ getSortIcon('timestamp') }}</th>
+          <th (click)="sortBy('usagePercent')" class="sortable">Usage {{ getSortIcon('usagePercent') }}</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let record of cpuHistory">
+          <td>{{ formatTime(record.timestamp) }}</td>
+          <td>{{ record.usagePercent.toFixed(1) }}%</td>
+          <td>
+            <span class="badge" [class]="getUsageClass(record.usagePercent)">
+              {{ record.usagePercent < 50 ? 'Normal' : record.usagePercent < 80 ? 'High' : 'Critical' }}
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,31 @@
+<div class="app-layout">
+  <aside class="sidebar">
+    <div class="logo">
+      <h2>PC Monitor</h2>
+    </div>
+    
+    <nav class="nav-menu" role="navigation" aria-label="Main navigation">
+      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+        <span>Home</span>
+      </a>
+      <a routerLink="/ping" routerLinkActive="active">
+        <span>Ping</span>
+      </a>
+      <a routerLink="/cpu" routerLinkActive="active">
+        <span>CPU</span>
+      </a>
+      <a routerLink="/memory" routerLinkActive="active">
+        <span>Memory</span>
+      </a>
+    </nav>
+
+    <div class="settings-section">
+      <h4>Quick Settings</h4>
+      <p class="settings-note">URLs saved in localStorage</p>
+    </div>
+  </aside>
+  
+  <main class="main-content" role="main">
+    <router-outlet></router-outlet>
+  </main>
+</div>
