@@ -9,21 +9,6 @@ A real-time system monitoring application built with **Angular** and **Python Fa
 
 ---
 
-## 📋 Table of Contents
-
-- [Features](#features)
-- [Tech Stack](#tech-stack)
-- [Prerequisites](#prerequisites)
-- [Installation](#installation)
-- [Running the Application](#running-the-application)
-- [API Endpoints](#api-endpoints)
-- [Configuration](#configuration)
-- [Troubleshooting](#troubleshooting)
-- [Testing Error Scenarios](#testing-error-scenarios)
-- [Development Notes](#development-notes)
-
----
-
 ## ✨ Features
 
 ### 🔄 Ping Monitoring
