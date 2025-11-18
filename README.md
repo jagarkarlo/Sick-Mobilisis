@@ -11,13 +11,16 @@ A real-time system monitoring application built with **Angular** and **Python Fa
 
 ## 📋 Table of Contents
 
-- [Features](#-features)
-- [Tech Stack](#-tech-stack)
-- [Prerequisites](#-prerequisites)
-- [Installation](#-installation)
-- [Running the Application](#-running-the-application)
-- [API Endpoints](#-api-endpoints)
-- [Troubleshooting](#-troubleshooting)
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+- [Running the Application](#running-the-application)
+- [API Endpoints](#api-endpoints)
+- [Configuration](#configuration)
+- [Troubleshooting](#troubleshooting)
+- [Testing Error Scenarios](#testing-error-scenarios)
+- [Development Notes](#development-notes)
 
 ---
 
@@ -59,7 +62,7 @@ A real-time system monitoring application built with **Angular** and **Python Fa
 ### Frontend
 - **Angular 20.3.10** - Component-based SPA framework
 - **RxJS** - Reactive programming with Observables
-- **TypeScript 5.x** - Type-safe JavaScript
+- **TypeScript 5.9.3** - Type-safe JavaScript
 - **Reactive Forms** - Form handling and validation
 - **ngx-toastr** - Toast notifications
 
@@ -94,8 +97,7 @@ npm install -g @angular/cli@20.3.10
 
 ### 1️⃣ Clone the Repository
 ```bash
-git clone 
-cd pc-status-monitor
+git clone https://github.com/jagarkarlo/Sick-Mobilisis.git
 ```
 
 ### 2️⃣ Backend Setup
