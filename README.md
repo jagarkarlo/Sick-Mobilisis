@@ -5,7 +5,7 @@ A real-time system monitoring application built with **Angular** and **Python Fa
 ![Python](https://img.shields.io/badge/Python-3.14-blue?logo=python&logoColor=white)
 ![Angular](https://img.shields.io/badge/Angular-20.3.10-red?logo=angular)
 ![FastAPI](https://img.shields.io/badge/FastAPI-WebSockets-009688?logo=fastapi)
-![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue?logo=typescript)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.9.3-blue?logo=typescript)
 
 ---
 
