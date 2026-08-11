@@ -1,0 +1,13 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Environment files and local configuration
+.env
+.env.*
+
+# Frontend build output
+frontend/node_modules/
+frontend/dist/

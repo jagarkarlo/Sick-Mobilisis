@@ -2,6 +2,8 @@
 
 A real-time system monitoring application built with **Angular** and **Python FastAPI**. Monitor CPU usage, memory consumption, and network latency through a modern web interface with live updates via REST APIs and WebSockets.
 
+> This is a learning project that deliberately simulates selected failures and WebSocket disconnects so the frontend can demonstrate loading, error, and reconnection states.
+
 ![Python](https://img.shields.io/badge/Python-3.14-blue?logo=python&logoColor=white)
 ![Angular](https://img.shields.io/badge/Angular-20.3.10-red?logo=angular)
 ![FastAPI](https://img.shields.io/badge/FastAPI-WebSockets-009688?logo=fastapi)
@@ -82,7 +84,8 @@ npm install -g @angular/cli@20.3.10
 
 ### 1️⃣ Clone the Repository
 ```bash
-git clone https://github.com/jagarkarlo/Sick-Mobilisis.git
+git clone https://github.com/jagarkarlo/pc-status-monitor.git
+cd pc-status-monitor
 ```
 
 ### 2️⃣ Backend Setup
@@ -400,3 +403,9 @@ ngOnDestroy(): void {
   this.memoryService.cleanup();
 }
 ```
+
+---
+
+## License
+
+Licensed under the [MIT License](LICENSE).
