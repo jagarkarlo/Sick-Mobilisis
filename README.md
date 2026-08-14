@@ -71,6 +71,18 @@ The frontend uses REST requests for ping and CPU samples, while the memory view 
 
 ---
 
+## What This Demonstrates
+
+| Area | Demonstrated behavior |
+| --- | --- |
+| Client polling | Configurable 1-60 second polling, pause/resume control, filtering, sorting, and a bounded ping history. |
+| Async UX | Loading state for the deliberately delayed CPU endpoint and one-second client-side debounce for refresh requests. |
+| Streaming resilience | WebSocket connection state, explicit disconnect/reconnect controls, exponential-backoff recovery, and handling for forced and error closures. |
+| Failure handling | Deliberately simulated REST failures and WebSocket faults surfaced through history records and toast notifications. |
+| Local configuration | Runtime REST and WebSocket base URLs stored in browser `localStorage`. |
+
+---
+
 ## 🛠️ Tech Stack
 
 ### Frontend
