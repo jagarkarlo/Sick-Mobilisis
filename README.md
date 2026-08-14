@@ -11,6 +11,33 @@ A real-time system monitoring application built with **Angular** and **Python Fa
 
 ---
 
+## Architecture
+
+```mermaid
+flowchart LR
+  Browser[Browser]
+  Frontend[Angular dashboard<br/>localhost:4200]
+  Api[FastAPI backend<br/>localhost:8000]
+  Ping[Ping monitor<br/>REST: /api/ping]
+  Cpu[CPU monitor<br/>REST: /api/cpu]
+  Memory[Memory stream<br/>WebSocket: /ws/memory]
+  Metrics[Local system metrics<br/>psutil]
+
+  Browser --> Frontend
+  Frontend -->|HTTP polling| Api
+  Frontend <-->|WebSocket stream| Api
+  Api --> Ping
+  Api --> Cpu
+  Api --> Memory
+  Ping --> Metrics
+  Cpu --> Metrics
+  Memory --> Metrics
+```
+
+The frontend uses REST requests for ping and CPU samples, while the memory view uses a WebSocket stream. The backend intentionally injects selected failures and disconnects so the UI can demonstrate recovery behavior.
+
+---
+
 ## ✨ Features
 
 ### 🔄 Ping Monitoring
