@@ -1,13 +1,17 @@
 # 🖥️ PC Status Monitor
 
+<p align="center">
+  <img src="https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white" alt="Angular">
+  <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript">
+  <img src="https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white" alt="FastAPI">
+  <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python">
+  <img src="https://img.shields.io/badge/WebSockets-010101?style=for-the-badge" alt="WebSockets">
+  <img src="https://img.shields.io/badge/License-MIT-3FB950?style=for-the-badge" alt="License">
+</p>
+
 A real-time system monitoring application built with **Angular** and **Python FastAPI**. Monitor CPU usage, memory consumption, and network latency through a modern web interface with live updates via REST APIs and WebSockets.
 
 > This is a learning project that deliberately simulates selected failures and WebSocket disconnects so the frontend can demonstrate loading, error, and reconnection states.
-
-![Python](https://img.shields.io/badge/Python-3.14-blue?logo=python&logoColor=white)
-![Angular](https://img.shields.io/badge/Angular-20.3.10-red?logo=angular)
-![FastAPI](https://img.shields.io/badge/FastAPI-WebSockets-009688?logo=fastapi)
-![TypeScript](https://img.shields.io/badge/TypeScript-5.9.3-blue?logo=typescript)
 
 ---
 
